@@ -3,7 +3,7 @@ mod config;
 pub use config::Config;
 
 use crate::{
-    frame::{changed::Changed, Frame},
+    frame::{Changed, Frame},
     hasher::Hasher,
     util::{chunk::Chunk, point::Point},
 };

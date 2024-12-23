@@ -1,6 +1,7 @@
-pub mod changed;
+mod changed;
 
-use changed::Changed;
+pub use changed::Changed;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]

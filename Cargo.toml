@@ -1,6 +1,6 @@
 [package]
 name = "chunk-diff"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Miyamizu Mitsuha <miyammitsuha@gmail.com>"]
 description = "A fast and memory-efficient library for computing the difference between two frames of rect."

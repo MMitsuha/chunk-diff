@@ -2,6 +2,13 @@
 name = "chunk-diff"
 version = "0.1.0"
 edition = "2021"
+authors = ["Miyamizu Mitsuha <miyammitsuha@gmail.com>"]
+description = "A fast and memory-efficient library for computing the difference between two frames of rect."
+readme = "README.md"
+keywords = ["hash", "hasher", "video", "frame", "diff", "chunk", "chunk-diff"]
+categories = ["algorithms"]
+repository = "https://github.com/MMitsuha/chunk-diff"
+license = "MIT"
 
 [dependencies]
 rayon = "1.10.0"

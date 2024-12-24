@@ -1,13 +1,14 @@
-pub mod xxhash;
+mod xxhash;
 
+pub use xxhash::*;
+
+use crate::util::{Chunk, Rect};
 use rayon::prelude::{IndexedParallelIterator, ParallelIterator, ParallelSlice};
-
-use crate::util::{chunk::Chunk, rect::Rect};
 
 pub trait Hasher {
     fn hash(&self, data: &[u8]) -> u64;
 
-    fn hash_rect(&self, data: &[u8], chunk: &Chunk, full: &Rect) -> Vec<u64>
+    fn hash_chunk(&self, data: &[u8], chunk: &Chunk, full: &Rect) -> Vec<u64>
     where
         Self: Sync,
     {

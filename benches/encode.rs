@@ -1,6 +1,6 @@
 use chunk_diff::{
     encoder::{Config, Encoder},
-    hasher::xxhash::XxHasher,
+    hasher::XxHasher,
     util::rect::Rect,
 };
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};

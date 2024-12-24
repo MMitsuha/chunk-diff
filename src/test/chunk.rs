@@ -1,4 +1,4 @@
-use crate::util::rect::Rect;
+use crate::util::Rect;
 
 #[test]
 fn divide_chunk_exact() {

@@ -1,6 +1,6 @@
 use crate::{
-    hasher::{xxhash::XxHasher, Hasher},
-    util::rect::Rect,
+    hasher::{Hasher, XxHasher},
+    util::Rect,
 };
 
 #[test]
@@ -12,7 +12,7 @@ fn hash_rect_eq() {
     let hasher = XxHasher::default();
     let hashes = chunks
         .iter()
-        .map(|chunk| hasher.hash_rect(&data, &chunk, &full))
+        .map(|chunk| hasher.hash_chunk(&data, &chunk, &full))
         .collect::<Box<_>>();
 
     assert_eq!(hashes.len(), 12);
@@ -31,7 +31,7 @@ fn hash_rect_ne() {
     let hasher = XxHasher::default();
     let hashes = chunks
         .iter()
-        .map(|chunk| hasher.hash_rect(&data, &chunk, &full))
+        .map(|chunk| hasher.hash_chunk(&data, &chunk, &full))
         .collect::<Box<_>>();
 
     assert_eq!(hashes.len(), 2);

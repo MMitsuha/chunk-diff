@@ -1,4 +1,4 @@
-use super::{point::Point, rect::Rect};
+use super::{Point, rect::Rect};
 use rayon::prelude::{
     IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator, ParallelSlice,
     ParallelSliceMut,
@@ -24,7 +24,8 @@ impl Chunk {
         &self.rect
     }
 
-    pub fn extract<'a>(&self, data: &'a [u8], full: &Rect) -> Vec<Vec<u8>> {
+    /// Extract data from rect of this chunk.
+    pub fn extract(&self, data: &[u8], full: &Rect) -> Vec<Vec<u8>> {
         data.par_chunks(full.width())
             .skip(self.point.y())
             .take(self.rect.height())
@@ -32,6 +33,15 @@ impl Chunk {
             .collect::<Vec<_>>()
     }
 
+    pub fn extract_non_copy<'a>(&self, data: &'a [u8], full: &Rect) -> Vec<&'a [u8]> {
+        data.par_chunks(full.width())
+            .skip(self.point.y())
+            .take(self.rect.height())
+            .map(|slice| &slice[self.point.x()..self.point.x() + self.rect.width()])
+            .collect()
+    }
+
+    /// Apply slices to data in rect of this chunk.
     pub fn apply(&self, data: &mut [u8], slices: &Vec<Vec<u8>>, full: &Rect) {
         data.par_chunks_mut(full.width())
             .skip(self.point.y())

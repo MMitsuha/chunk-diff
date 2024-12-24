@@ -1,4 +1,4 @@
-use super::{chunk::Chunk, point::Point};
+use super::{Chunk, Point};
 use num_integer::Integer;
 use serde::{Deserialize, Serialize};
 
@@ -25,6 +25,9 @@ impl Rect {
         self.width * self.height
     }
 
+    /// Divide this rect into chunks.
+    /// Chunk order is granted to be from left to right, top to bottom.
+    /// exact divide first, then non-exact divide x, then non-exact divide y, then non-exact divide x and y.
     pub fn divide(&self, rect: &Rect) -> Vec<Chunk> {
         let (x_count, x_remainder) = self.width.div_rem(&rect.width);
         let (y_count, y_remainder) = self.height.div_rem(&rect.height);

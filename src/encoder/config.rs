@@ -1,4 +1,4 @@
-use crate::util::rect::Rect;
+use crate::util::Rect;
 
 pub struct Config {
     /// Rect of the chunk to be hashed and compared.

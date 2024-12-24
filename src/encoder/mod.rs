@@ -1,11 +1,11 @@
 mod config;
 
-pub use config::Config;
+pub use config::*;
 
 use crate::{
     frame::{Changed, Frame},
     hasher::Hasher,
-    util::{chunk::Chunk, point::Point},
+    util::{Chunk, Point},
 };
 use rayon::prelude::{IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator};
 
@@ -54,7 +54,7 @@ where
         let hashes = self
             .chunks
             .par_iter()
-            .map(|chunk| (*chunk, self.hasher.hash_rect(data, chunk, full)))
+            .map(|chunk| (*chunk, self.hasher.hash_chunk(data, chunk, full)))
             .collect::<Vec<_>>();
         let frames = if self.hashes.len() != hashes.len() {
             let full_chunk = Chunk::new(Point::new(0, 0), *full);

@@ -1,3 +1,7 @@
-pub mod chunk;
-pub mod point;
-pub mod rect;
+mod chunk;
+mod point;
+mod rect;
+
+pub use chunk::*;
+pub use point::*;
+pub use rect::*;

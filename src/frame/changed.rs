@@ -1,4 +1,4 @@
-use crate::util::{chunk::Chunk, rect::Rect};
+use crate::util::{Chunk, Rect};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -8,7 +8,7 @@ pub struct Changed {
 }
 
 impl Changed {
-    pub fn new(chunk: Chunk, data: Vec<Vec<u8>>) -> Self {
+    pub(crate) fn new(chunk: Chunk, data: Vec<Vec<u8>>) -> Self {
         Self { chunk, data }
     }
 

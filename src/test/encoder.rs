@@ -1,8 +1,8 @@
 use crate::{
     encoder::{Config, Encoder},
     frame::Frame,
-    hasher::xxhash::XxHasher,
-    util::rect::Rect,
+    hasher::XxHasher,
+    util::Rect,
 };
 use rand::Rng;
 

@@ -14,9 +14,23 @@ where
     T: Hasher,
 {
     hasher: T,
-    config: Config,
+    config: Option<Config>,
     chunks: Vec<Chunk>,
     hashes: Vec<(Chunk, Vec<u64>)>,
+}
+
+impl<T> Default for Encoder<T>
+where
+    T: Hasher + Default,
+{
+    fn default() -> Self {
+        Self {
+            hasher: T::default(),
+            config: None,
+            chunks: Vec::new(),
+            hashes: Vec::new(),
+        }
+    }
 }
 
 impl<T> Encoder<T>
@@ -38,23 +52,29 @@ where
 
         Self {
             hasher,
-            config,
+            config: Some(config),
             chunks,
             hashes: Vec::with_capacity(size),
         }
     }
 
-    pub fn reinitialize(&mut self, config: Config) {
-        let full = config.full();
-        let rect = config.rect();
-        let chunks = full.divide(rect);
+    pub fn reinitialize(&mut self, config: Option<Config>) {
+        if self.config == config {
+            return;
+        }
 
-        self.config = config;
-        self.chunks = chunks;
+        if let Some(config) = config {
+            let full = config.full();
+            let rect = config.rect();
+            let chunks = full.divide(rect);
+
+            self.config = Some(config);
+            self.chunks = chunks;
+        }
     }
 
     pub fn encode(&mut self, data: &[u8]) -> Vec<Frame> {
-        let full = self.config.full();
+        let full = self.config.as_ref().unwrap().full();
 
         if data.len() != full.area() {
             panic!("Data length does not match full rect area");

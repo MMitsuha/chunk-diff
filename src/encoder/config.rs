@@ -1,5 +1,6 @@
 use crate::util::Rect;
 
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Config {
     /// Rect of the chunk to be hashed and compared.
     rect: Rect,

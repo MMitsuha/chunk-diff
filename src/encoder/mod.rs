@@ -44,6 +44,15 @@ where
         }
     }
 
+    pub fn reinitialize(&mut self, config: Config) {
+        let full = config.full();
+        let rect = config.rect();
+        let chunks = full.divide(rect);
+
+        self.config = config;
+        self.chunks = chunks;
+    }
+
     pub fn encode(&mut self, data: &[u8]) -> Vec<Frame> {
         let full = self.config.full();
 
